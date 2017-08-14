@@ -3,7 +3,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -35,6 +34,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'django_countries',
     'avatar',
+    'easy_thumbnails',
 ]
 
 MIDDLEWARE = [
@@ -192,4 +192,12 @@ CONSTANCE_CONFIG = {
     'VIMEO_URL': ('', 'Link to your Vimeo page.'),
     'LINKEDIN_URL': ('', 'Link to your LinkedIn profile.'),
     'GALLERY_DESCRIPTION': ('', 'Shot description of gallery index page.'),
+}
+
+# easy_thumbnails
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'thumbnail': {'size': (250, 250), 'crop': True},
+    },
 }

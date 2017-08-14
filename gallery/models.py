@@ -1,4 +1,5 @@
 from django.db import models
+from easy_thumbnails.fields import ThumbnailerImageField
 
 
 class Image(models.Model):
@@ -37,6 +38,7 @@ class GalleryCategory(models.Model):
 class Gallery(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
+    featured = ThumbnailerImageField(upload_to='featured', blank=True)
     images = models.ManyToManyField(Image, blank=True)
     videos = models.ManyToManyField(Video, blank=True)
     category = models.ManyToManyField(

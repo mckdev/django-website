@@ -1,2 +1,6 @@
-<h2><a href="{% url 'gallery:detail' gallery.pk %}">{{ gallery.name }}</a></h2>
+{% load thumbnail %}
+<a href="{% url 'gallery:detail' gallery.pk %}">
+<h2>{{ gallery.name }}</h2>
+<img src="{{ gallery.featured|thumbnail_url:'thumbnail' }}" alt="{{ gallery.name }}">
+</a>
 <p>{{ gallery.description }}</p>
