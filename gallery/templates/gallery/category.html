@@ -1,0 +1,19 @@
+{% extends 'website/base.html' %}
+
+{% block heading %}
+    <h1 class="display-4">Gallery: {{ category }}</h1>
+    <p class="lead">{{ category.description }}</p>
+    {% include 'gallery/menu.html' %}
+
+    {% if user.is_superuser %}<a class="edit-button" href="{% url 'admin:gallery_gallerycategory_change' category.pk %}" target="_blank"><i class="fa fa-pencil" aria-hidden="true"></i> Edit category "{{ category }}"</a>{% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% for gallery in galleries %}
+        <div class="col-md-3">
+            {% include 'gallery/result.html' %}
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

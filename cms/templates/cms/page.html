@@ -1,0 +1,16 @@
+{% extends 'website/base.html' %}
+
+{% block heading %}
+    <h1 class="display-4">{{ page.title }} {% if user.is_superuser %}<a class="edit-button" href="{% url 'admin:cms_page_change' page.pk %}" target="_blank"><i class="fa fa-pencil" aria-hidden="true"></i></a>{% endif %}</h1>
+    <p class="lead">{{ page.description }}</p>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-9">
+            <div class="container">
+                <p>{% autoescape off %}{{ page.content }}{% endautoescape %}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

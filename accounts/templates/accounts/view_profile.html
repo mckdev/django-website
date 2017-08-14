@@ -1,0 +1,25 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% load avatar_tags %}
+
+{% block heading %}
+    <h1 class="display-4">Your profile</h1>
+    {% include 'accounts/navigation.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+  <ul>
+    {% avatar user 150 class="img-responsive profile-image" %}
+    <li>First name: {{ request.user.first_name }}</li>
+    <li>Last name: {{ request.user.last_name }}</li>
+    <li>Email: {{ request.user.email }}</li>
+    <li>Phone number: {{ request.user.profile.phone_number }}</li>
+    <li>Country: {{ request.user.profile.country.name }} <img src="{{ request.user.profile.country.flag }}" alt="{{ request.user.profile.country }}"></li>
+    <li>About: {{ request.user.profile.about }}</li>
+  </ul>
+</div>
+    </div>
+{% endblock %}

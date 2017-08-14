@@ -1,0 +1,7 @@
+<div class="filter-menu">
+<strong class="text-muted">Categories:&nbsp;</strong>
+<a href="{% url 'gallery:index' %}" class="btn btn-secondary {% if request.resolver_match.view_name == 'gallery:index' %}active{% endif %}">All</a>
+{% for category in gallery_categories %}
+    <a href="{% url 'gallery:category' category.slug %}" class="btn btn-secondary {% if category.slug in request.path %}active{% endif %}">{{ category.name }}</a>
+{% endfor %}
+</div>

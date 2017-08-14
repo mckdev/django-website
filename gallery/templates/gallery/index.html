@@ -1,0 +1,17 @@
+{% extends 'website/base.html' %}
+
+{% block heading %}
+    <h1 class="display-4">Gallery</h1>
+    <p class="lead">{{ config.GALLERY_DESCRIPTION }}</p>
+    {% include 'gallery/menu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% for gallery in galleries %}
+        <div class="col-md-3">
+            {% include 'gallery/result.html' %}
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

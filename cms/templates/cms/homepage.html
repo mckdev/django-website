@@ -1,0 +1,39 @@
+{% extends 'website/base.html' %}
+
+{% block heading %}
+    <h1 class="display-4">{{ homepage.heading }}</h1>
+    <p class="lead">{{ homepage.description }}</p>
+    {% if user.is_superuser %}<a class="edit-button" href="{% url 'admin:cms_homepage_change' homepage.pk %}" target="_blank"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Homepage</a>{% endif %}
+{% endblock %}
+
+{% block content %}
+        <div class="row">
+            <div class="col-md-12">
+                {% if homepage.carousel %}
+                    {% include 'cms/carousel.html' %}
+                {% endif %}
+            </div>
+        </div>
+    {% if homepage.sections %}
+        {% for section in homepage.sections.all %}
+            <div class="row">
+                <div class="col-md-12 text-center editable">
+                    <h2 class="section-title text-muted">{% if not section.hide_title %}{{ section.title }}{% else %}{% endif %}</h2>
+                    {% if user.is_superuser %}<a class="edit-button" href="{% url 'admin:cms_homepagesection_change' section.pk %}" target="_blank"><i class="fa fa-pencil" aria-hidden="true"></i> Edit section "{{ section.title }}"</a>{% endif %}
+                </div>
+            {% if section.contents %}
+                {% for content in section.contents.all %}
+                    <div class="col-md-{{ content.width }} offset-{{ content.offset }} homepage-section-content text-{{ content.text_align }} editable">
+                        {% if not content.hide_title %}<h3>{{ content.title }}</h3>{% endif %}
+                        <p>{{ content.content }}</p>
+                        {% if content.button_text %}
+                            <p class="text-{{ content.button_align }}"><a class="btn btn-secondary" href="{% if content.button_link %}{{ content.button_link }}{% else %}#{% endif %}" role="button">{{ content.button_text }}</a></p>
+                        {% endif %}
+                        {% if user.is_superuser %}<a class="edit-button" href="{% url 'admin:cms_homepagesectioncontent_change' content.pk %}" target="_blank"><i class="fa fa-pencil" aria-hidden="true"></i> Edit content "{{ content.title }}"</a>{% endif %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

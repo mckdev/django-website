@@ -1,0 +1,39 @@
+{% extends 'website/base.html' %}
+
+{% block heading %}
+    <h1 class="display-4">{{ gallery.name }}</h1>
+    <p class="lead">{{ gallery.description }}</p>
+    {% if user.is_superuser %}<a class="edit-button" href="{% url 'admin:gallery_gallery_change' gallery.pk %}" target="_blank"><i class="fa fa-pencil" aria-hidden="true"></i> Edit this gallery</a>{% endif %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <h2 class="gallery-subheading">Images</h2>
+        </div>
+        {% for image in gallery.images.all %}
+        <div class="col-md-4 editable">
+            <h3>{{ image.title }}
+</h3>
+            <a href="{{ image.upload.url }}" target="_blank"><img src="{{ image.upload.url }}" alt="{{ image.name }}" class="img-responsive gallery-item"></a>
+            <p>{{ image.description }}</p>
+            {% if user.is_superuser %}<a class="edit-button" href="{% url 'admin:gallery_image_change' image.pk %}" target="_blank"><i class="fa fa-pencil" aria-hidden="true"></i> Edit image</a>{% endif %}
+        </div>
+        {% endfor %}
+        <div class="col-md-12">
+            <h2 class="gallery-subheading">Videos</h2>
+        </div>
+        {% for video in gallery.videos.all %}
+        <div class="col-md-6 editable">
+            <h3>{{ video.title }}</h3>
+            <div class="video-wrapper">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ video.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <p>{{ video.description }}</p>
+            {% if user.is_superuser %}<a class="edit-button" href="{% url 'admin:gallery_video_change' video.pk %}" target="_blank"><i class="fa fa-pencil" aria-hidden="true"></i> Edit video</a>{% endif %}
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

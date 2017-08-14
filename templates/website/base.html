@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{{ config.SITE_TITLE }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        {% include 'website/menu.html' %}
+
+        <div class="jumbotron editable">
+                {% block heading %}
+                {% endblock %}
+        </div>
+
+        {% block content %}
+        {% endblock %}
+
+        <footer>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="section-title text-muted">Find us on</h2>
+                    <ul class="list-inline">
+                        {% if config.FACEBOOK_URL %}
+                        <li class="list-inline-item">
+                            <a href="{{ config.FACEBOOK_URL }}" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook fa-2x"></i></a>
+                        </li>
+                        {% endif %}
+                        {% if config.TWITTER_URL %}
+                        <li class="list-inline-item">
+                            <a href="{{ config.TWITTER_URL }}" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter fa-2x"></i></a>
+                        </li>
+                        {% endif %}
+                        {% if config.GPLUS_URL %}
+                        <li class="list-inline-item">
+                            <a href="{{ config.GPLUS_URL }}" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus fa-2x"></i></a>
+                        </li>
+                        {% endif %}
+                        {% if config.YOUTUBE_URL %}
+                        <li class="list-inline-item">
+                            <a href="{{ config.YOUTUBE_URL }}" class="btn-social btn-outline"><i class="fa fa-fw fa-youtube fa-2x"></i></a>
+                        </li>
+                        {% endif %}
+                        {% if config.VIMEO_URL %}
+                        <li class="list-inline-item">
+                            <a href="{{ config.VIMEO_URL }}" class="btn-social btn-outline"><i class="fa fa-fw fa-vimeo fa-2x"></i></a>
+                        </li>
+                        {% endif %}
+                        {% if config.LINKEDIN_URL %}
+                        <li class="list-inline-item">
+                            <a href="{{ config.LINKEDIN_URL }}" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin fa-2x"></i></a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        {% if footer %}
+            <hr />
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    {{ footer.content|safe }}
+                </div>
+            </div>
+        {% endif %}
+
+        </footer>
+    </div>
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script>
+        $(".edit-button").hide(0);
+        $(".editable").hover(function ()
+        {
+            $(this).children(".edit-button").show();
+        }, function () {
+            $(".edit-button").hide(0);
+            }
+        );
+    </script>
+</body>
+</html>

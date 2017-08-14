@@ -1,0 +1,35 @@
+<div class="editable">
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="{% url 'cms:homepage' %}">{{ config.SHORT_TITLE }}</a>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item {% if request.resolver_match.view_name == 'cms:homepage' %}active{% endif%}">
+            <a class="nav-link" href="{% url 'cms:homepage' %}">Home {% if request.resolver_match.view_name == 'cms:homepage' %}<span class="sr-only">(current)</span>{% endif %}</a>
+            </li>
+            {% if menu_items %}
+                {% for page in menu_items %}
+                <li class="nav-item {% if page.slug in request.path %}active{% endif%}"><a class="nav-link" href="{% url 'cms:page' page.slug %}">{{ page.title }} {% if page.slug in request.path %}<span class="sr-only">(current)</span>{% endif%}</a></li>
+                {% endfor %}
+            {% endif %}
+            <li class="nav-item {% if request.resolver_match.view_name == 'gallery:index' %}active{% endif%}"><a class="nav-link" href="{% url 'gallery:index' %}">Gallery {% if request.resolver_match.view_name == 'gallery:index' %}<span class="sr-only">(current)</span>{% endif %}</a></li>
+        </ul>
+        <ul class="navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+              <li class="nav-item {% if request.resolver_match.view_name == 'accounts:view_profile' %}active{% endif%}">
+                  <a class="nav-link" href="{% url 'accounts:view_profile' %}">View profile{% if request.resolver_match.view_name == 'accounts:profile' %}<span class="sr-only">(current)</span>{% endif %}</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+              </li>
+            {% else %}
+              <li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}">Sign-up</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+{% if user.is_superuser %}<a class="edit-button" href="{% url 'admin:cms_menu_change' config.TOPMENU_ID %}" target="_blank"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Menu</a>{% endif %}
+</div>
