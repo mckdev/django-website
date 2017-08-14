@@ -18,7 +18,7 @@ from uploads.models import Upload, UploadCategory
 
 def signup(request):
     if request.user.is_authenticated():
-        return redirect('view_profile')
+        return redirect('profile_view')
     else:
         if request.method == 'POST':
             form = SignupForm(request.POST)
@@ -58,13 +58,13 @@ def activate(request, uidb64, token):
 
 
 @login_required
-def view_profile(request):
-    return render(request, 'accounts/view_profile.html')
+def profile_view(request):
+    return render(request, 'accounts/profile_view.html')
 
 
 @login_required
 @transaction.atomic
-def update_profile(request):
+def profile_edit(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
@@ -72,13 +72,13 @@ def update_profile(request):
             user_form.save()
             profile_form.save()
             messages.success(request, _('Your profile was successfully updated!'))
-            return redirect('view_profile')
+            return redirect('profile_view')
         else:
             messages.error(request, _('Please correct the error below.'))
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'accounts/edit_profile.html', {
+    return render(request, 'accounts/profile_edit.html', {
         'user_form': user_form,
         'profile_form': profile_form
     })
@@ -86,7 +86,7 @@ def update_profile(request):
 
 @login_required
 @transaction.atomic
-def change_password(request):
+def password_change(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
@@ -97,7 +97,7 @@ def change_password(request):
             messages.error(request, 'Please correct the error below.')
     else:
         form = PasswordChangeForm(request.user)
-    return render(request, 'accounts/change_password.html', {
+    return render(request, 'accounts/password_change.html', {
         'form': form
     })
 

@@ -9,5 +9,4 @@ urlpatterns = [
     url(r'^gallery/', include('gallery.urls')),
     url(r'', include('cms.urls')),
     url(r'^accounts/', include('accounts.urls')),
-    url(r'^accounts/', include('accounts.auth_urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

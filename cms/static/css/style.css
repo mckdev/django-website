@@ -101,3 +101,11 @@ div:hover .edit-button {
 .jumbotron .lead {
     text-align: right;
 }
+
+.errorlist {
+    list-style-type: none;
+    font-weight: 600;
+    padding:5px;
+    border: 1px solid #a01;
+    width: 100%;
+}
