@@ -163,6 +163,10 @@ else:
     EMAIL_PORT = 587
 
 
+# Authentication backend
+AUTHENTICATION_BACKENDS = ('accounts.backends.CustomModelBackend', )
+
+
 # Avatars
 
 AVATAR_CACHE_ENABLED = False

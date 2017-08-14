@@ -85,7 +85,6 @@ def profile_edit(request):
 
 
 @login_required
-@transaction.atomic
 def password_change(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
