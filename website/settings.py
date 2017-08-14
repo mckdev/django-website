@@ -178,8 +178,7 @@ AVATAR_CACHE_ENABLED = False
 CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 
 CONSTANCE_CONFIG = {
-    'SITE_TITLE': ('Example website', 'Descriptive title of the website.'),
-    'SHORT_TITLE': ('Example', 'Short title of the website (e.g. for menu).'),
+    'SITE_TITLE': ('Django website', 'Descriptive title of the website.'),
     'HOMEPAGE_ID': (1, 'Homepage ID, '
                        'After creating a homepage, type in the ID here.'),
     'TOPMENU_ID': (1, 'Top menu ID, '

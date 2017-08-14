@@ -136,6 +136,7 @@ class Page(models.Model):
 
 
 class Menu(models.Model):
+    heading = models.CharField(max_length=20, blank=True)
     page_items = models.ManyToManyField(Page, blank=True)
 
     def __str__(self):
