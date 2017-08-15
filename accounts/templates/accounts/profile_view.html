@@ -2,6 +2,12 @@
 {% load static %}
 {% load thumbnail %}
 
+{% block meta %}
+    <title>Your profile - {{ config.SITE_TITLE }}</title>
+    <meta name="description" content="" />
+    <meta name="robots" content="noindex, nofollow">
+{% endblock %}
+
 {% block heading %}
     <h1 class="display-4">Your profile</h1>
     {% include 'accounts/navigation.html' %}

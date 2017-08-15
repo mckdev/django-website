@@ -1,7 +1,12 @@
 {% extends 'website/base.html' %}
 
+{% block meta %}
+    <title>Galleries - {{ config.SITE_TITLE }}</title>
+    <meta name="description" content="Image and video galleries from {{ config.SITE_TITLE }}." />
+{% endblock %}
+
 {% block heading %}
-    <h1 class="display-4">Gallery</h1>
+    <h1 class="display-4">Galleries</h1>
     <p class="lead">{{ config.GALLERY_DESCRIPTION }}</p>
     {% include 'gallery/menu.html' %}
 {% endblock %}

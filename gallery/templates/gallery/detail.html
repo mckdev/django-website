@@ -1,5 +1,10 @@
 {% extends 'website/base.html' %}
 
+{% block meta %}
+    <title>{% if gallery.seo_title %}{{ gallery.seo_title }}{% else %}{{ gallery.name }}{% endif %}</title>
+    <meta name="description" content="{% if gallery.seo_description %}{{ gallery.seo_description }}{% else %}{{ gallery.description }}{% endif %}" />
+{% endblock %}
+
 {% block heading %}
     <h1 class="display-4">{{ gallery.name }}</h1>
     <p class="lead">{{ gallery.description }}</p>

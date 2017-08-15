@@ -1,5 +1,11 @@
 {% extends 'website/base.html' %}
 
+{% block meta %}
+    <title>Login - {{ config.SITE_TITLE }}</title>
+    <meta name="description" content="" />
+    <meta name="robots" content="noindex, nofollow">
+{% endblock %}
+
 {% block heading %}
     <h1 class="display-4">Login</h1>
     {% include 'accounts/navigation.html' %}

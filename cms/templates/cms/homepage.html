@@ -1,5 +1,10 @@
 {% extends 'website/base.html' %}
 
+{% block meta %}
+    <title>{% if homepage.seo_title %}{{ homepage.seo_title }}{% else %}{{ config.SITE_TITLE }}{% endif %}</title>
+    <meta name="description" content="{% if homepage.seo_description %}{{ homepage.seo_description }}{% else %}{{ config.SITE_TITLE }} - {{ homepage.description }}{% endif %}" />
+{% endblock %}
+
 {% block heading %}
     <h1 class="display-4">{{ homepage.heading }}</h1>
     <p class="lead">{{ homepage.description }}</p>

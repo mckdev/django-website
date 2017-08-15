@@ -78,8 +78,10 @@ class SiteFooter(models.Model):
 
 
 class Homepage(models.Model):
-    heading = models.CharField(max_length=60)
-    description = models.CharField(max_length=160)
+    heading = models.CharField(max_length=100)
+    description = models.CharField(max_length=200)
+    seo_title = models.CharField(max_length=60, blank=True, null=True)
+    seo_description = models.CharField(max_length=160, blank=True, null=True)
     carousel = models.ForeignKey(
         Carousel,
         on_delete=models.SET_NULL,
@@ -116,6 +118,8 @@ class Page(models.Model):
         verbose_name= 'Short description',
         help_text='Short description of the page.'
     )
+    seo_title = models.CharField(max_length=60, blank=True, null=True)
+    seo_description = models.CharField(max_length=160, blank=True, null=True)
 
     content = RichTextUploadingField(
         verbose_name= 'Content',

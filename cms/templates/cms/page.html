@@ -1,8 +1,14 @@
 {% extends 'website/base.html' %}
 
+{% block meta %}
+    <title>{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}</title>
+    <meta name="description" content="{% if page.seo_description %}{{ page.seo_description }}{% else %}{{ page.description }}{% endif %}" />
+{% endblock %}
+
 {% block heading %}
     <h1 class="display-4">{{ page.title }} {% if user.is_superuser %}<a class="edit-button" href="{% url 'admin:cms_page_change' page.pk %}" target="_blank"><i class="fa fa-pencil" aria-hidden="true"></i></a>{% endif %}</h1>
     <p class="lead">{{ page.description }}</p>
+    {% if user.is_superuser %}<a class="edit-button" href="{% url 'admin:cms_page_change' page.pk %}" target="_blank"><i class="fa fa-pencil" aria-hidden="true"></i> Edit page {{ page.title }}</a>{% endif %}
 {% endblock %}
 
 {% block content %}

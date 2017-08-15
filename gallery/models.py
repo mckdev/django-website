@@ -29,6 +29,8 @@ class GalleryCategory(models.Model):
         help_text='The slug will be used as URL of the page. Must be unique!'
     )
     description = models.TextField(null=True, blank=True)
+    seo_title = models.CharField(max_length=60, blank=True, null=True)
+    seo_description = models.CharField(max_length=160, blank=True, null=True)
     sorting_value = models.IntegerField(default=0)
 
     def __str__(self):
@@ -38,6 +40,8 @@ class GalleryCategory(models.Model):
 class Gallery(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
+    seo_title = models.CharField(max_length=60, blank=True, null=True)
+    seo_description = models.CharField(max_length=160, blank=True, null=True)
     featured = ThumbnailerImageField(upload_to='featured', blank=True)
     images = models.ManyToManyField(Image, blank=True)
     videos = models.ManyToManyField(Video, blank=True)
