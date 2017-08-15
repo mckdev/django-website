@@ -33,5 +33,4 @@ urlpatterns = [
     # User profile
     url(r'^profile/$', views.profile_view, name='profile_view'),
     url(r'^profile/edit/$', views.profile_edit, name='profile_edit'),
-    url(r'^profile/image/', include('avatar.urls')),
 ]

@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'django_countries',
-    'avatar',
     'easy_thumbnails',
 ]
 
@@ -165,11 +164,6 @@ else:
 
 # Authentication backend
 AUTHENTICATION_BACKENDS = ('accounts.backends.CustomModelBackend', )
-
-
-# Avatars
-
-AVATAR_CACHE_ENABLED = False
 
 
 # Custom dynamic settings with Constance

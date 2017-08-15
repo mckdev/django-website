@@ -1,7 +1,6 @@
 {% if user.is_authenticated %}
 <a href="{% url 'profile_view' %}" class="btn btn-secondary {% if request.resolver_match.view_name == 'profile_view' %}active{% endif %}">View Profile</a>
 <a href="{% url 'profile_edit' %}" class="btn btn-secondary {% if request.resolver_match.view_name == 'profile_edit' %}active{% endif %}">Edit Profile</a>
-<a href="{% url 'avatar_change' %}" class="btn btn-secondary {% if request.resolver_match.view_name == 'avatar_change' %}active{% endif %}">Change profile image</a>
 <a href="{% url 'password_change' %}" class="btn btn-secondary {% if request.resolver_match.view_name == 'password_change' %}active{% endif %}">Change password</a>
 {% if user.is_superuser %}<a href="{% url 'admin:index' %}" target="_blank" class="btn btn-secondary"><strong>Administration</strong></a>{% endif %}
 {% endif %}
