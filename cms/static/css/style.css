@@ -98,6 +98,11 @@ div:hover .edit-button {
     margin-bottom: 1rem;
 }
 
+.user-details ul {
+    list-style-type: none;
+    padding: 0;
+}
+
 .errorlist {
     list-style-type: none;
     color: red;

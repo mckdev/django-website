@@ -3,6 +3,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django_countries.fields import CountryField
+from easy_thumbnails.fields import ThumbnailerImageField
 
 
 class Profile(models.Model):
@@ -16,6 +17,8 @@ class Profile(models.Model):
     phone_number = models.CharField(max_length=20, blank=True)
     country = CountryField(blank=True)
     about = models.TextField(max_length=500, blank=True)
+    image =  ThumbnailerImageField(upload_to='profile_images', blank=True,
+                                   null=True)
 
     def __str__(self):
         return self.user.username

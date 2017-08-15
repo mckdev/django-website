@@ -46,7 +46,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('phone_number', 'country', 'about',)
+        fields = ('phone_number', 'country', 'about', 'image',)
 
 
 class PasswordChangeForm(PasswordChangeForm):
