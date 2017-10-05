@@ -1,0 +1,43 @@
+{% extends 'website/base.html' %}
+{% load static from staticfiles %}
+{% load thumbnail %}
+
+{% block meta %}
+    <title>Portfolio - {{ config.SITE_TITLE }}</title>
+    <meta name="description" content="Portfolio by {{ config.SITE_TITLE }}">
+{% endblock meta %}
+
+{% block heading %}
+    <h1 class="display-4">Portfolio</h1>
+    <p class="lead">{{ config.GALLERY_DESCRIPTION }}</p>
+    <!-- {% include 'portfolio/portfolio_menu.html' %} -->
+{% endblock heading %}
+
+{% block content %}
+    <section id="portfolio">
+        <div class="row">
+        {% if items %}
+            {% for item in items  %}
+                <div class="col-md-3">
+                    <h3><a href="#">{{ item.title }}</a></h3>
+                    <a href="#">
+                        <img src="{{ item.featured_image|thumbnail_url:'thumbnail' }}" alt="{{ item.title }}">
+                    </a>
+                    {% if item.short_description %}
+                        {{ item.short_description }}
+                    {% else %}
+                        {% autoescape on %}
+                        {{ item.description|truncatewords:20|striptags }}
+                        {% endautoescape %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% endif %}
+        </div>
+    </section>
+    {% if items|length >= 2 %}
+    <section class="success">
+		<!-- {% include 'portfolio/portfolio_menu.html' %} -->
+    </section>
+    {% endif %}
+{% endblock %}

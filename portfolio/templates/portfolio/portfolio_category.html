@@ -1,0 +1,145 @@
+{% extends 'motionforms/base.html' %}
+ {% load static from staticfiles %}
+{% load i18n %}
+{% block seo_meta %}
+    <title>{{ category.title }} - Portfolio {{ config.SITE_NAME }}</title>
+    <meta name="description" content="{{ category.description }}">
+    {% if config.SEO_NOINDEX or category.noindex == True %}<meta name="robots" content="noindex">{% endif %}
+{% endblock seo_meta %}
+
+{% block content %}
+	<header>
+		<div class="container">
+			<div class="row">
+			<div class="col-lg-12">
+				<h1>Portfolio - {{ category.title }} </h1>
+				<hr class="star-primary">
+		        {% include 'motionforms/portfolio_menu.html' %}
+			</div>
+			</div>
+		</div>
+	</header>
+    <section id="portfolio">
+    
+        {% if items %}
+
+            {% if category.featured_item %}
+                <section class="featured">
+                <div class="row">
+
+                    <div class="col-sm-4 col-sm-offset-4 text-center">
+                        {% if category.featured_item.featured_image %}
+                        <a href="#portfolioModal" class="portfolio-link" data-toggle="modal">
+                            <div class="overlay-image">
+                                <img src="{{ category.featured_item.featured_image.url }}" class="img-responsive img-centered" alt="{{ category.featured_item.title }}" />
+                                <i class="overlay-icon fa {% if category.featured_item.vimeo_id %}fa-play-circle{% else %}fa-eye{% endif %} fa-5x"></i>
+                            </div>
+
+                        </a>
+                        {% endif %}
+                    </div>
+
+
+
+                </div>
+                </section>
+            {% endif %}
+
+            {% for item in items  %}
+            
+
+
+            <section>
+            <div class="row">
+                <div class="col-sm-3 col-sm-offset-3 text-right">
+
+                    {% if forloop.counter|divisibleby:2 %}
+                        <a href="{% url 'portfolio_item' item.category.slug item.id %}">
+                            {% if item.thumbnail %}
+                                <img src="{{ item.thumbnail.url }}" class="img-responsive img-thumbnail" alt="{{ item.title }}">
+                            {% endif %}
+                        </a>
+                    {% else %}
+                        <h3><a href="{% url 'portfolio_item' item.category.slug item.id %}">{{ item.title }}</a></h3>
+                        {% if item.short_description %}
+                            {{ item.short_description }}
+                        {% else %}
+                            {% autoescape on %}
+                            {{ item.description|truncatewords:20|striptags }}
+                            {% endautoescape %}
+                        {% endif %}
+                    {% endif %}
+                </div>
+            
+                <div class="col-sm-3 text-left">
+
+
+                    {% if forloop.counter|divisibleby:2 %}
+                        <h3><a href="{% url 'portfolio_item' item.category.slug item.id %}">{{ item.title }}</a></h3>
+                        {% if item.short_description %}
+                            {{ item.short_description }}
+                        {% else %}
+                            {% autoescape on %}
+                            {{ item.description|truncatewords:20|striptags }}
+                            {% endautoescape %}
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'portfolio_item' item.category.slug item.id %}">
+                            {% if item.thumbnail %}
+                                <img src="{{ item.thumbnail.url }}" class="img-responsive img-thumbnail" alt="{{ item.title }}">
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                </div>
+
+            </div>
+            </section>
+            {% endfor %}
+        {% endif %}
+    
+
+                
+    </section>
+    {% if items|length >= 2 %}
+    <section class="success">
+		{% include 'motionforms/portfolio_menu.html' %}
+    </section>
+    {% endif %}
+
+<!- Featured Modal -->
+{% if category.featured_item %}
+    <div class="portfolio-modal modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="modal-body">
+                            <h2>{{ category.featured_item.title }}</h2>
+                            <hr class="star-primary">
+                            {% if category.featured_item.vimeo_id %}
+                            <div class="videoWrapper">
+        	                <iframe src="https://player.vimeo.com/video/{{category.featured_item.vimeo_id}}?title=0&byline=0&portrait=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                            </div>
+                            {% else %}
+                            <img src="{{ category.featured_item.featured_image.url }}" class="img-responsive img-centered" alt="{{ category.featured_item.title }}">
+                            {% endif %}
+                            <p>{{ category.featured_item.short_description }}</p>
+                            <div class="text-center">
+                                <input class="btn btn-primary btn-lg" type="button" onclick="location.href='{% url 'portfolio_item' category.featured_item.category.slug category.featured_item.id %}';" value="{% trans 'Project page' %}" />
+                            </div>
+                            <hr class="star-light">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i>{% trans 'Close' %}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

@@ -19,6 +19,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'cms.apps.CmsConfig',
+    'portfolio.apps.PortfolioConfig',
     'gallery.apps.GalleryConfig',
     'uploads.apps.UploadsConfig',
     'accounts.apps.AccountsConfig',
@@ -186,6 +187,7 @@ CONSTANCE_CONFIG = {
     'VIMEO_URL': ('', 'Link to your Vimeo page.'),
     'LINKEDIN_URL': ('', 'Link to your LinkedIn profile.'),
     'GALLERY_DESCRIPTION': ('', 'Shot description of gallery index page.'),
+    'PORTFOLIO_ENABLED': (True, 'Enable or diable the portfolio', bool),
 }
 
 # easy_thumbnails

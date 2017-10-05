@@ -1,0 +1,59 @@
+{% extends 'motionforms/base.html' %}
+{% load i18n %}
+ {% load static from staticfiles %}
+
+{% block seo_meta %}
+    <title>{{ portfolio_item.title }} - {{ config.SITE_NAME }}</title>
+    <meta name="description" content="{{ portfolio_item.short_description }}">
+    {% if config.SEO_NOINDEX or portfolio_item.noindex == True %}<meta name="robots" content="noindex">{% endif %}
+{% endblock seo_meta %}
+
+{% block content %}
+	<header>
+		<div class="container">
+			<div class="row">
+			<div class="col-lg-12">
+				<h1>{{ portfolio_item.title }}</h1>
+				<hr class="star-primary">
+					{% if user.is_authenticated %}			
+							<a href="{% url 'portfolio_edit' portfolio_item.id %}">Edit</a>
+						{% if portfolio_item.published_date %}
+						{% else %}
+					    <a href="{% url 'portfolio_publish' portfolio_item.id %}">{% trans "Publish" %}</a>
+						{% endif %}
+					{% endif %}
+
+
+			</div>
+			</div>
+		</div>
+	</header>
+    <article class="portfolio-content">
+    <section class="success">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 text-center">
+            {% if portfolio_item.vimeo_id %}
+            <div class="videoWrapper">
+        	        <iframe src="https://player.vimeo.com/video/{{portfolio_item.vimeo_id}}?title=0&byline=0&portrait=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </div>
+            {% elif portfolio_item.featured_image %}
+                <img src="{{ portfolio_item.featured_image.url }}" class="img-responsive center-block" alt="{{ item.title }}" />
+            {% endif %}
+
+
+        </div>
+    </div>
+    </section>
+
+    <section>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 text-center">
+          <p>{% autoescape off %}{{ portfolio_item.description }}{% endautoescape %}</p>
+        </div>
+    </div>
+    </section>
+    <section class="success">
+		{% include 'motionforms/portfolio_menu.html' %}
+    </section>
+    </article>
+{% endblock %}

@@ -10,6 +10,7 @@ def menu_processor(request):
         menu_heading = menu.heading
     except Menu.DoesNotExist:
         menu_items = None
+        menu_heading = None
     return {'menu_items': menu_items, 'menu_heading': menu_heading}
 
 

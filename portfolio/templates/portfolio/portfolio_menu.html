@@ -1,0 +1,11 @@
+{% load i18n %}
+<div class="row portfolio-bottom">
+    <div class="col-sm-8 text-center col-sm-offset-2">
+        <ul class="nav nav-pills nav-justified">
+            <li {% if portfolio_home %}class="_active"{% endif %}><a href="{% url 'portfolio:portfolio' %}">All projects</a></li>
+            {% for category in categories %}
+            <li {% if category.slug in request.path %}class="_active"{% endif %}><a href="#">{{ category.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

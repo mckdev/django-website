@@ -14,7 +14,8 @@
                 <li class="nav-item {% if page.slug in request.path %}active{% endif%}"><a class="nav-link" href="{% url 'cms:page' page.slug %}">{{ page.title }} {% if page.slug in request.path %}<span class="sr-only">(current)</span>{% endif%}</a></li>
                 {% endfor %}
             {% endif %}
-            <li class="nav-item {% if request.resolver_match.view_name == 'gallery:index' %}active{% endif%}"><a class="nav-link" href="{% url 'gallery:index' %}">Gallery {% if request.resolver_match.view_name == 'gallery:index' %}<span class="sr-only">(current)</span>{% endif %}</a></li>
+            <!-- <li class="nav-item {% if request.resolver_match.view_name == 'gallery:index' %}active{% endif%}"><a class="nav-link" href="{% url 'gallery:index' %}">Gallery {% if request.resolver_match.view_name == 'gallery:index' %}<span class="sr-only">(current)</span>{% endif %}</a></li> -->
+            <li class="nav-item {% if request.resolver_match.view_name == 'portfolio:portfolio' %}active{% endif%}"><a class="nav-link" href="{% url 'portfolio:portfolio' %}">Portfolio {% if request.resolver_match.view_name == 'portfolio:portfolio' %}<span class="sr-only">(current)</span>{% endif %}</a></li>
         </ul>
         <ul class="navbar-nav navbar-right">
             {% if user.is_authenticated %}
